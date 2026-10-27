@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "slug": "veranstaltungsanmeldung",
+      "component": "Veranstaltungsanmeldung",
+      "title": "Veranstaltung anmelden",
+      "endpoints": [
+        {
+          "entity": "veranstaltungen",
+          "op": "list",
+          "fields": [
+            "titel",
+            "veranstaltungsart",
+            "beginn",
+            "ende",
+            "anmeldefrist",
+            "ort_name",
+            "strasse",
+            "hausnummer",
+            "plz",
+            "ort",
+            "headerbild",
+            "kurzbeschreibung",
+            "beschreibung",
+            "begruessungstext",
+            "datenschutzhinweis",
+            "bestaetigungstext"
+          ],
+          "scope": "r.v_status == 'anmeldung_offen' and r.v_anmeldefrist >= today()",
+          "scope_description": "zeigt nur Veranstaltungen mit Status „Anmeldung offen“ und Anmeldefrist heute oder später",
+          "max_records": 200
+        },
+        {
+          "entity": "anmeldungen",
+          "op": "create",
+          "fields": [
+            "veranstaltung",
+            "vorname",
+            "nachname",
+            "email",
+            "telefon",
+            "unternehmen",
+            "position",
+            "anzahl_personen",
+            "bemerkungen",
+            "datenschutz_einwilligung",
+            "newsletter_einwilligung"
+          ],
+          "preset_fields": {
+            "anmeldestatus": "eingegangen"
+          }
+        }
+      ]
+    }
+  ]
+}

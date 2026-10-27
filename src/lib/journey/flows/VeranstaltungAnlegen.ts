@@ -118,7 +118,7 @@ export function useVeranstaltungAnlegenFlow(options: VeranstaltungAnlegenFlowOpt
   const searches = {
     ansprechperson: useRecordSearch(servicePort, 'personen', withPickPolicy('ansprechperson', {
       searchFields: ["vorname", "nachname", "unternehmen"] as never,
-      filter: "r.v_personenart in ['ansprechperson', 'mitarbeitende']",
+      filter: "'ansprechperson' in r.v_personenart or 'mitarbeitende' in r.v_personenart",
       where: (r: JourneyRecord) => fieldLookups(r, "personenart").some(o => ["ansprechperson", "mitarbeitende"].includes(o.key)),
       toItem: options.items?.ansprechperson as never,
     })),
