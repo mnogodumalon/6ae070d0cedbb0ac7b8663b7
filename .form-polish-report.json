@@ -1,0 +1,30 @@
+{
+  "entities": {
+    "Personen": {
+      "placeholders_set": 5,
+      "defaults_keys": [],
+      "computed_keys": [],
+      "reason": "Reine Stammdaten ohne numerische Felder, daher keine Formeln und keine sinnvollen Standardwerte."
+    },
+    "Veranstaltungen": {
+      "placeholders_set": 17,
+      "defaults_keys": [
+        "status",
+        "beginn"
+      ],
+      "computed_keys": [
+        "_veranstaltung_dauer_stunden"
+      ],
+      "reason": "Beginn und Ende bilden ein Datumspaar, daher wird die Dauer in Stunden als virtuelles Feld berechnet; ein Preis fehlt, also keine weitere Formel."
+    },
+    "Anmeldungen": {
+      "placeholders_set": 9,
+      "defaults_keys": [
+        "anzahl_personen",
+        "anmeldestatus"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da es kein Datumspaar und keine Preisspalte gibt; max_teilnehmer der Veranstaltung ergibt mit der Personenzahl keine sinnvolle Berechnung."
+    }
+  }
+}

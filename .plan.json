@@ -1,0 +1,302 @@
+{
+  "version": 1,
+  "language": "de",
+  "understanding": {
+    "summary": "Der IT-Cluster Oberfranken organisiert damit alle seine Aktivitäten, allen voran Veranstaltungen. Veranstaltungen werden mit Terminen, Ort, Texten und Headerbild gepflegt. Besucher melden sich auf öffentlichen Seiten an, deren Texte und Bilder die Mitarbeitenden selbst festlegen. Personen (Ansprechpersonen, Mitglieder, Mitarbeitende, Teilnehmende) werden zentral verwaltet, auch angemeldete Personen landen dort.",
+    "roles": [
+      "Mitarbeitende des IT-Clusters (Geschäftsstelle)",
+      "Administration",
+      "Besucher und Interessierte (öffentliche Anmeldung)"
+    ],
+    "main_tasks": [
+      "Veranstaltung anlegen und Anmeldeseite mit Bild und Texten gestalten",
+      "Anmeldungen entgegennehmen und bestätigen oder auf die Warteliste setzen",
+      "Angemeldete Personen in den Personen speichern",
+      "Ansprechpersonen und andere Personen verwalten",
+      "Aktivitäten aller Art erfassen, auch Besuche fremder Veranstaltungen"
+    ],
+    "platform_roles": [
+      {
+        "persona": "Mitarbeitende des IT-Clusters (Geschäftsstelle)",
+        "role": "datenverarbeitung",
+        "apps": [
+          "veranstaltungen",
+          "anmeldungen",
+          "personen"
+        ]
+      },
+      {
+        "persona": "Administration",
+        "role": "administrator",
+        "apps": [
+          "veranstaltungen",
+          "anmeldungen",
+          "personen"
+        ]
+      }
+    ]
+  },
+  "flows": [
+    {
+      "slug": "veranstaltung-anlegen",
+      "label": {
+        "de": "Veranstaltung anlegen",
+        "en": "Create event"
+      },
+      "description": "Eine Veranstaltung oder Aktivität mit Termin, Ort, Ansprechperson und Texten der Anmeldeseite in einem Zug erfassen.",
+      "priority": "must",
+      "writes": [
+        {
+          "entity": "veranstaltungen",
+          "op": "create",
+          "when": "always",
+          "fields": {
+            "titel": "user",
+            "veranstaltungsart": "user",
+            "status": "fixed:entwurf",
+            "beginn": "user",
+            "ende": "user",
+            "anmeldefrist": "user",
+            "max_teilnehmer": "user",
+            "ort_name": "user",
+            "strasse": "user",
+            "hausnummer": "user",
+            "plz": "user",
+            "ort": "user",
+            "ansprechperson": "picked",
+            "headerbild": "user",
+            "kurzbeschreibung": "user",
+            "beschreibung": "user",
+            "begruessungstext": "user",
+            "datenschutzhinweis": "user",
+            "bestaetigungstext": "user"
+          },
+          "needs": {}
+        }
+      ],
+      "required": [],
+      "brief": "# Flow `veranstaltung-anlegen` — Veranstaltung anlegen\nEine Veranstaltung oder Aktivität mit Termin, Ort, Ansprechperson und Texten der Anmeldeseite in einem Zug erfassen.\n\n## Your hook — import it, never rebuild what it owns\n`import { useVeranstaltungAnlegenFlow } from '@/lib/journey/flows/VeranstaltungAnlegen';` — generated from the Schreibliste below. It OWNS the form(s), one record search per picked field (columns and filter from the plan) and the submit plan with every fixed and derived value. You compose: `flow.forms.<entity>` for <Bound>/<Field>, `{...flow.picks.<field>.select} {...flow.pick('<field>')}` (or `flow.pickMany` for a multi pick) for <EntitySelectStep>, `flow.validateStep(n)` in StepNav.onNext, `flow.submit` + `flow.formList` for SummaryStep/SuccessStep, `flow.reset()`; what the hook does not own reads through its door `flow.port` — availability `useOccupancy(flow.port, '<entity>', { resource })`, a count `useRecordCount(flow.port, …)` — never import servicePort next to the hook. Options: `steps` (field → step), `items` (how a hit reads, per pick: ansprechperson), `initial`, `messages`. The hook's docblock in .lane-context.md shows the exact call. Never import servicePort, useStepForm, useJourneySubmit, useRecordSearch or useDashboardData in this page — check-intents refuses a page that uses the hook and any of them.\n\n## Steps (in this order)\n1. Titel und Veranstaltungsart wählen\n2. Beginn, Ende, Anmeldefrist und maximale Teilnehmerzahl eintragen\n3. Ort erfassen\n4. Ansprechperson aus den Personen auswählen\n5. Headerbild und Texte der Anmeldeseite pflegen\n\n## Schreibliste — the ONLY writes this flow makes (the gate compares your plan steps with this list)\n- creates `veranstaltungen`:\n    - `titel`: the user enters it (bind it through the layer: form.field/…)\n    - `veranstaltungsart`: the user enters it (bind it through the layer: form.field/…)\n    - `status`: fixed value `entwurf` — set it in the plan step's values, never ask\n    - `beginn`: the user enters it (bind it through the layer: form.field/…)\n    - `ende`: the user enters it (bind it through the layer: form.field/…)\n    - `anmeldefrist`: the user enters it (bind it through the layer: form.field/…)\n    - `max_teilnehmer`: the user enters it (bind it through the layer: form.field/…)\n    - `ort_name`: the user enters it (bind it through the layer: form.field/…)\n    - `strasse`: the user enters it (bind it through the layer: form.field/…)\n    - `hausnummer`: the user enters it (bind it through the layer: form.field/…)\n    - `plz`: the user enters it (bind it through the layer: form.field/…)\n    - `ort`: the user enters it (bind it through the layer: form.field/…)\n    - `ansprechperson`: from the record the user picks in this flow\n    - `headerbild`: the user enters it (bind it through the layer: form.field/…)\n    - `kurzbeschreibung`: the user enters it (bind it through the layer: form.field/…)\n    - `beschreibung`: the user enters it (bind it through the layer: form.field/…)\n    - `begruessungstext`: the user enters it (bind it through the layer: form.field/…)\n    - `datenschutzhinweis`: the user enters it (bind it through the layer: form.field/…)\n    - `bestaetigungstext`: the user enters it (bind it through the layer: form.field/…)\n\n## Reads\n- `personen` columns vorname, nachname, unternehmen, personenart\n\n## Success page\n- shows: `veranstaltungen.titel`, `veranstaltungen.status`\n- next flows to offer: `anmeldung-bearbeiten`\n\n## Never write these — another flow or a tool owns them\n- `personen.vorname` (owner: intent `anmeldung-bearbeiten`)\n- `personen.nachname` (owner: intent `anmeldung-bearbeiten`)\n- `personen.email` (owner: intent `anmeldung-bearbeiten`)\n- `personen.telefon` (owner: intent `anmeldung-bearbeiten`)\n- `personen.unternehmen` (owner: intent `anmeldung-bearbeiten`)\n- `personen.funktion` (owner: intent `anmeldung-bearbeiten`)\n- `personen.personenart` (owner: intent `anmeldung-bearbeiten`)\n- `anmeldungen.anmeldestatus` (owner: intent `anmeldung-bearbeiten`)\n- `anmeldungen.person` (owner: intent `anmeldung-bearbeiten`)\n"
+    },
+    {
+      "slug": "anmeldung-bearbeiten",
+      "label": {
+        "de": "Anmeldung bearbeiten",
+        "en": "Process registration"
+      },
+      "description": "Eine eingegangene Anmeldung bestätigen oder auf die Warteliste setzen und die Person in Personen speichern.",
+      "priority": "must",
+      "writes": [
+        {
+          "entity": "personen",
+          "op": "create",
+          "when": "optional",
+          "fields": {
+            "vorname": "user",
+            "nachname": "user",
+            "email": "user",
+            "telefon": "user",
+            "unternehmen": "user",
+            "funktion": "user",
+            "personenart": "fixed:teilnehmende"
+          },
+          "needs": {}
+        },
+        {
+          "entity": "anmeldungen",
+          "op": "update",
+          "when": "always",
+          "fields": {
+            "anmeldestatus": "user",
+            "person": "picked"
+          },
+          "needs": {}
+        }
+      ],
+      "required": [],
+      "brief": "# Flow `anmeldung-bearbeiten` — Anmeldung bearbeiten\nEine eingegangene Anmeldung bestätigen oder auf die Warteliste setzen und die Person in Personen speichern.\n\n## Your hook — import it, never rebuild what it owns\n`import { useAnmeldungBearbeitenFlow } from '@/lib/journey/flows/AnmeldungBearbeiten';` — generated from the Schreibliste below. It OWNS the form(s), one record search per picked field (columns and filter from the plan) and the submit plan with every fixed and derived value. You compose: `flow.forms.<entity>` for <Bound>/<Field>, `{...flow.picks.<field>.select} {...flow.pick('<field>')}` (or `flow.pickMany` for a multi pick) for <EntitySelectStep>, `flow.validateStep(n)` in StepNav.onNext, `flow.submit` + `flow.formList` for SummaryStep/SuccessStep, `flow.reset()`; what the hook does not own reads through its door `flow.port` — availability `useOccupancy(flow.port, '<entity>', { resource })`, a count `useRecordCount(flow.port, …)` — never import servicePort next to the hook. Options: `steps` (field → step), `items` (how a hit reads, per pick: person), `initial`, `messages`. The hook's docblock in .lane-context.md shows the exact call. This flow CHANGES a record of `anmeldungen`: `{...flow.picks.anmeldungen.select} {...flow.pick('anmeldungen')}` picks it, the hook prefills the form with its current values and updates THAT record — never a create step, never a list from useDashboardData. Never import servicePort, useStepForm, useJourneySubmit, useRecordSearch or useDashboardData in this page — check-intents refuses a page that uses the hook and any of them.\n\n## Steps (in this order)\n1. Eingegangene Anmeldung wählen\n2. Freie Plätze der Veranstaltung ansehen\n3. Bestätigen oder auf Warteliste setzen\n4. Person in Personen anlegen und zuordnen\n\n## Schreibliste — the ONLY writes this flow makes (the gate compares your plan steps with this list)\n- creates `personen` (only when the flow needs it):\n    - `vorname`: the user enters it (bind it through the layer: form.field/…)\n    - `nachname`: the user enters it (bind it through the layer: form.field/…)\n    - `email`: the user enters it (bind it through the layer: form.field/…)\n    - `telefon`: the user enters it (bind it through the layer: form.field/…)\n    - `unternehmen`: the user enters it (bind it through the layer: form.field/…)\n    - `funktion`: the user enters it (bind it through the layer: form.field/…)\n    - `personenart`: fixed value `teilnehmende` — set it in the plan step's values, never ask\n- updates `anmeldungen`:\n    - `anmeldestatus`: the user enters it (bind it through the layer: form.field/…)\n    - `person`: from the record the user picks in this flow\n\n## Reads\n- `anmeldungen` columns veranstaltung, vorname, nachname, email, anzahl_personen, anmeldestatus\n- `veranstaltungen` columns titel, beginn, max_teilnehmer, status\n\n## Checks BEFORE the write (block the submit with the message when they fail)\n- custom (max=`veranstaltungen.max_teilnehmer`, quantity=`anmeldungen.anzahl_personen`) — message: „Die maximale Teilnehmerzahl der Veranstaltung ist mit dieser Bestätigung überschritten.“\n\n## Success page\n- shows: `anmeldungen.anmeldestatus`, `anmeldungen.person`\n\n## Never write these — another flow or a tool owns them\n- `veranstaltungen.titel` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.veranstaltungsart` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.status` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.beginn` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.ende` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.anmeldefrist` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.max_teilnehmer` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.ort_name` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.strasse` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.hausnummer` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.plz` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.ort` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.ansprechperson` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.headerbild` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.kurzbeschreibung` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.beschreibung` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.begruessungstext` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.datenschutzhinweis` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.bestaetigungstext` (owner: intent `veranstaltung-anlegen`)\n"
+    },
+    {
+      "slug": "anmeldung-oeffnen",
+      "label": {
+        "de": "Anmeldung öffnen",
+        "en": "Open registration"
+      },
+      "description": "Eine Veranstaltung im Entwurf für die öffentliche Anmeldung freigeben, wenn Frist und Teilnehmerzahl gesetzt sind.",
+      "priority": "nice",
+      "writes": [
+        {
+          "entity": "veranstaltungen",
+          "op": "update",
+          "when": "always",
+          "fields": {
+            "status": "fixed:anmeldung_offen"
+          },
+          "needs": {}
+        }
+      ],
+      "required": [],
+      "brief": "# Flow `anmeldung-oeffnen` — Anmeldung öffnen\nEine Veranstaltung im Entwurf für die öffentliche Anmeldung freigeben, wenn Frist und Teilnehmerzahl gesetzt sind.\n\n## Your hook — import it, never rebuild what it owns\n`import { useAnmeldungOeffnenFlow } from '@/lib/journey/flows/AnmeldungOeffnen';` — generated from the Schreibliste below. It OWNS the form(s), one record search per picked field (columns and filter from the plan) and the submit plan with every fixed and derived value. You compose: `flow.forms.<entity>` for <Bound>/<Field>, `{...flow.picks.<field>.select} {...flow.pick('<field>')}` (or `flow.pickMany` for a multi pick) for <EntitySelectStep>, `flow.validateStep(n)` in StepNav.onNext, `flow.submit` + `flow.formList` for SummaryStep/SuccessStep, `flow.reset()`; what the hook does not own reads through its door `flow.port` — availability `useOccupancy(flow.port, '<entity>', { resource })`, a count `useRecordCount(flow.port, …)` — never import servicePort next to the hook. Options: `steps` (field → step), `items` (how a hit reads, per pick), `initial`, `messages`. The hook's docblock in .lane-context.md shows the exact call. This flow CHANGES a record of `veranstaltungen`: `{...flow.picks.veranstaltungen.select} {...flow.pick('veranstaltungen')}` picks it, the hook prefills the form with its current values and updates THAT record — never a create step, never a list from useDashboardData. Never import servicePort, useStepForm, useJourneySubmit, useRecordSearch or useDashboardData in this page — check-intents refuses a page that uses the hook and any of them.\n\n## Steps (in this order)\n1. Veranstaltung im Entwurf wählen\n2. Anmeldefrist und Teilnehmerzahl prüfen\n3. Status auf Anmeldung offen setzen\n\n## Schreibliste — the ONLY writes this flow makes (the gate compares your plan steps with this list)\n- updates `veranstaltungen`:\n    - `status`: fixed value `anmeldung_offen` — set it in the plan step's values, never ask\n\n## Reads\n- `veranstaltungen` columns titel, beginn, anmeldefrist, max_teilnehmer, status\n\n## Success page\n- shows: `veranstaltungen.status`\n\n## Never write these — another flow or a tool owns them\n- `veranstaltungen.titel` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.veranstaltungsart` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.beginn` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.ende` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.anmeldefrist` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.max_teilnehmer` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.ort_name` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.strasse` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.hausnummer` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.plz` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.ort` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.ansprechperson` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.headerbild` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.kurzbeschreibung` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.beschreibung` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.begruessungstext` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.datenschutzhinweis` (owner: intent `veranstaltung-anlegen`)\n- `veranstaltungen.bestaetigungstext` (owner: intent `veranstaltung-anlegen`)\n- `personen.vorname` (owner: intent `anmeldung-bearbeiten`)\n- `personen.nachname` (owner: intent `anmeldung-bearbeiten`)\n- `personen.email` (owner: intent `anmeldung-bearbeiten`)\n- `personen.telefon` (owner: intent `anmeldung-bearbeiten`)\n- `personen.unternehmen` (owner: intent `anmeldung-bearbeiten`)\n- `personen.funktion` (owner: intent `anmeldung-bearbeiten`)\n- `personen.personenart` (owner: intent `anmeldung-bearbeiten`)\n- `anmeldungen.anmeldestatus` (owner: intent `anmeldung-bearbeiten`)\n- `anmeldungen.person` (owner: intent `anmeldung-bearbeiten`)\n"
+    }
+  ],
+  "public_pages": [
+    {
+      "slug": "veranstaltungsanmeldung",
+      "purpose": "Besucher sehen die Veranstaltungen mit offener Anmeldung und Anmeldefrist heute oder später (mit Titel, Termin, Ort, Kurzbeschreibung, Headerbild und Anmeldetexten), wählen eine aus und melden sich an. Die Veranstaltung ist nur wählbar, solange der Status Anmeldung offen ist und die Anmeldefrist nicht überschritten ist. Ausgebuchte Veranstaltungen erscheinen nicht. Es werden keine Daten anderer Angemeldeter gezeigt. Die Texte und das Headerbild pflegen die Mitarbeitenden an der Veranstaltung.",
+      "publish": true,
+      "lists": [
+        {
+          "entity": "veranstaltungen",
+          "columns": [
+            "titel",
+            "veranstaltungsart",
+            "beginn",
+            "ende",
+            "anmeldefrist",
+            "ort_name",
+            "strasse",
+            "hausnummer",
+            "plz",
+            "ort",
+            "headerbild",
+            "kurzbeschreibung",
+            "beschreibung",
+            "begruessungstext",
+            "datenschutzhinweis",
+            "bestaetigungstext"
+          ],
+          "filter": {
+            "mode": "all",
+            "conditions": [
+              {
+                "field": "status",
+                "op": "eq",
+                "value": "anmeldung_offen"
+              },
+              {
+                "field": "anmeldefrist",
+                "op": "gte",
+                "value": {
+                  "rel": "today"
+                }
+              }
+            ]
+          },
+          "max_records": null
+        }
+      ],
+      "creates": [
+        {
+          "entity": "anmeldungen",
+          "fields": {
+            "veranstaltung": "picked",
+            "vorname": "user",
+            "nachname": "user",
+            "email": "user",
+            "telefon": "user",
+            "unternehmen": "user",
+            "position": "user",
+            "anzahl_personen": "user",
+            "bemerkungen": "user",
+            "datenschutz_einwilligung": "user",
+            "newsletter_einwilligung": "user"
+          },
+          "fixed": {
+            "anmeldestatus": "eingegangen"
+          }
+        }
+      ],
+      "brief": "# Public page `veranstaltungsanmeldung`\nBesucher sehen die Veranstaltungen mit offener Anmeldung und Anmeldefrist heute oder später (mit Titel, Termin, Ort, Kurzbeschreibung, Headerbild und Anmeldetexten), wählen eine aus und melden sich an. Die Veranstaltung ist nur wählbar, solange der Status Anmeldung offen ist und die Anmeldefrist nicht überschritten ist. Ausgebuchte Veranstaltungen erscheinen nicht. Es werden keine Daten anderer Angemeldeter gezeigt. Die Texte und das Headerbild pflegen die Mitarbeitenden an der Veranstaltung.\n\n## Lists (declare exactly these in the surface)\n- `veranstaltungen`: columns `titel`, `veranstaltungsart`, `beginn`, `ende`, `anmeldefrist`, `ort_name`, `strasse`, `hausnummer`, `plz`, `ort`, `headerbild`, `kurzbeschreibung`, `beschreibung`, `begruessungstext`, `datenschutzhinweis`, `bestaetigungstext`, filter {\"mode\": \"all\", \"conditions\": [{\"field\": \"status\", \"op\": \"eq\", \"value\": \"anmeldung_offen\"}, {\"field\": \"anmeldefrist\", \"op\": \"gte\", \"value\": {\"rel\": \"today\"}}]}\n\n## Creates (declare exactly these in the surface)\n- `anmeldungen`: visitor fields `veranstaltung`, `vorname`, `nachname`, `email`, `telefon`, `unternehmen`, `position`, `anzahl_personen`, `bemerkungen`, `datenschutz_einwilligung`, `newsletter_einwilligung`; preset_fields {\"anmeldestatus\": \"eingegangen\"}\n\n## Availability — mechanical, write nothing for it\nA picker (`useRecordSearch`) never offers a record another record already takes (a booked slot) — the layer leaves it out. To SHOW booked periods, call `useOccupancy(port, '<entity>')` and hand `blocked` to AvailabilityRangePicker; the integration gives the page exactly that read (dates or the reference, never who booked). Never declare a list of bookings with names or contacts to work availability out yourself.\n\nPublish: yes\n"
+    }
+  ],
+  "tools": [
+    {
+      "id": "veranstaltung-ausbuchen",
+      "purpose": "Läuft nach jeder neuen Anmeldung: zählt die bestätigten Anmeldungen (Anzahl Personen) der Veranstaltung und setzt den Status auf Ausgebucht, wenn die maximale Teilnehmerzahl erreicht ist."
+    },
+    {
+      "id": "anmeldefrist-abschliessen",
+      "purpose": "Schließt Veranstaltungen mit Status Anmeldung offen, deren Beginn bereits vorbei ist, durch Setzen auf Abgeschlossen."
+    },
+    {
+      "id": "neue-anmeldungen-melden",
+      "purpose": "Schickt täglich eine Sammelmail an den Schlüsselinhaber mit allen Anmeldungen im Status Eingegangen."
+    }
+  ],
+  "covered_by_platform": [
+    {
+      "wish": "Ansprechpersonen einfach auswählen können",
+      "feature": "record_form"
+    },
+    {
+      "wish": "Personen, Veranstaltungen und Anmeldungen suchen und filtern",
+      "feature": "search_filter"
+    },
+    {
+      "wish": "Übersicht der Anmeldungen je Veranstaltung",
+      "feature": "distribution_view"
+    },
+    {
+      "wish": "Teilnehmerlisten als Tabelle exportieren",
+      "feature": "csv_json_export"
+    },
+    {
+      "wish": "Unterlagen zu Veranstaltungen anhängen",
+      "feature": "record_attachments"
+    },
+    {
+      "wish": "Zugriff für Mitarbeitende regeln",
+      "feature": "user_roles"
+    }
+  ],
+  "ownership": {
+    "veranstaltungen": {
+      "titel": "intent:veranstaltung-anlegen",
+      "veranstaltungsart": "intent:veranstaltung-anlegen",
+      "status": "tool:anmeldefrist-abschliessen",
+      "beginn": "intent:veranstaltung-anlegen",
+      "ende": "intent:veranstaltung-anlegen",
+      "anmeldefrist": "intent:veranstaltung-anlegen",
+      "max_teilnehmer": "intent:veranstaltung-anlegen",
+      "ort_name": "intent:veranstaltung-anlegen",
+      "strasse": "intent:veranstaltung-anlegen",
+      "hausnummer": "intent:veranstaltung-anlegen",
+      "plz": "intent:veranstaltung-anlegen",
+      "ort": "intent:veranstaltung-anlegen",
+      "ansprechperson": "intent:veranstaltung-anlegen",
+      "headerbild": "intent:veranstaltung-anlegen",
+      "kurzbeschreibung": "intent:veranstaltung-anlegen",
+      "beschreibung": "intent:veranstaltung-anlegen",
+      "begruessungstext": "intent:veranstaltung-anlegen",
+      "datenschutzhinweis": "intent:veranstaltung-anlegen",
+      "bestaetigungstext": "intent:veranstaltung-anlegen"
+    },
+    "personen": {
+      "vorname": "intent:anmeldung-bearbeiten",
+      "nachname": "intent:anmeldung-bearbeiten",
+      "email": "intent:anmeldung-bearbeiten",
+      "telefon": "intent:anmeldung-bearbeiten",
+      "unternehmen": "intent:anmeldung-bearbeiten",
+      "funktion": "intent:anmeldung-bearbeiten",
+      "personenart": "intent:anmeldung-bearbeiten"
+    },
+    "anmeldungen": {
+      "anmeldestatus": "intent:anmeldung-bearbeiten",
+      "person": "intent:anmeldung-bearbeiten"
+    }
+  },
+  "dashboard": {
+    "focus": [
+      "Kommende Veranstaltungen mit offener Anmeldung",
+      "Neue Anmeldungen (Status Eingegangen)",
+      "Belegung je Veranstaltung gegenüber maximaler Teilnehmerzahl",
+      "Veranstaltungen mit bald ablaufender Anmeldefrist"
+    ],
+    "hints": [
+      "Nur Veranstaltungen mit Status Anmeldung offen und Anmeldefrist nicht überschritten sind auf der öffentlichen Seite wählbar",
+      "Texte und Headerbild der Anmeldeseite werden an der Veranstaltung gepflegt",
+      "Fremde Veranstaltungen und interne Aktivitäten laufen über die Veranstaltungsart"
+    ],
+    "writes": [],
+    "wishes": []
+  }
+}

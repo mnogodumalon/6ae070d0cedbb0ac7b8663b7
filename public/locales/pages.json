@@ -1,0 +1,33 @@
+{
+  "pages": {
+    "en": {
+      " · Frist {0}": " · Deadline {0}",
+      "Aktuell keine offene Anmeldung": "No open registration currently",
+      "Anmeldefrist in den nächsten 7 Tagen": "Registration deadline within the next 7 days",
+      "Anmeldung offen": "Registration open",
+      "Belegung & Fristen": "Occupancy & deadlines",
+      "Eingegangen": "Received",
+      "Frist endet bald": "Deadline ending soon",
+      "Keine Frist läuft bald ab": "No deadlines expiring soon",
+      "Keine Platzgrenzen hinterlegt": "No capacity limits set",
+      "Keine Veranstaltung mit offener Anmeldung.": "No event with open registration.",
+      "Keine neuen Anmeldungen — alles bearbeitet.": "No new registrations — all processed.",
+      "Lege deine erste Veranstaltung an und öffne die Anmeldung.": "Create your first event and open registration.",
+      "Neue Anmeldungen": "New registrations",
+      "Neue Veranstaltung": "New event",
+      "Nächste Veranstaltung: {0}": "Next event: {0}",
+      "Nächste Veranstaltung: {0} am {1}.": "Next event: {0} on {1}.",
+      "Ohne Titel": "Untitled",
+      "Plätze belegt": "Spots taken",
+      "Prüfen": "Review",
+      "Unbekannt": "Unknown",
+      "Veranstaltung prüfen": "Review event",
+      "Veranstaltungen mit freier Anmeldung": "Events with open registration",
+      "ist überbucht — {0} Plätze belegt bei maximal {1}.": "is overbooked — {0} spots taken, maximum {1}.",
+      "{0} angemeldet": "{0} registered",
+      "{0} von {1} Plätzen bei offenen Veranstaltungen": "{0} of {1} spots at open events",
+      "{0} {1} sich neu angemeldet und warten auf Bestätigung.": "{0} {1} newly registered and are awaiting confirmation."
+    }
+  },
+  "v": 1
+}

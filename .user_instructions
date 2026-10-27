@@ -1,0 +1,9 @@
+Der IT-Cluster Oberfranken möchte gerne künftig alle seine Aktivitäten (allen voran Veranstaltungen) mittels KLAR organisieren. Erstelle eine Anwendung mit der dies einfach und komfortabel gemacht wreden kann. Zu Veranstaltungen muss man sich auf öffentlichen Seiten anmelden können. Diese Anmeldungen sollen einfach konfiguriert werden können (Headerbild, Beschreibungstexte) - es braucht also ein einfaches Redaktionssystem.
+
+Braucht es nicht noch mehr Module? Beispielswerise möchte man Ansprechpersonen einfach auswählen können. Bei den Veranstaltungen dürfen natürlichg nur die auswählbar sein, für die man sich noch anmelden kann (laut Anmeldefrist).
+
+Benenne "Ansprechperson" bitte in "Personen" um. Dann können viele Arten von Personen damit verwaltet werden, beispielsweise auch Mitglieder, Mitarbeitende, Teilnehmer, ...). 
+
+Nach einer Anmeldung sollen die sich anmeldende Personen in "Personen" abgespeichert werden.
+
+Was schlägst du weiter vor, damit die Anwendung universell für die Mitarbeitenden des IT-Clusters für Aktivitäten aller Art (beispielsweise auch den Besuch fremder Veranstaltungen)

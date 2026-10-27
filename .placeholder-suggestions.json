@@ -1,0 +1,39 @@
+{
+  "PersonenDialog.tsx": {
+    "vorname": "z. B. Anna",
+    "nachname": "z. B. Müller",
+    "email": "z. B. anna.mueller@firma.de",
+    "unternehmen": "z. B. Muster GmbH",
+    "funktion": "z. B. Projektleiterin"
+  },
+  "VeranstaltungenDialog.tsx": {
+    "titel": "z. B. Netzwerktreffen Herbst 2026",
+    "veranstaltungsart": "z. B. Workshop, Webinar",
+    "beginn": "Wann beginnt die Veranstaltung?",
+    "ende": "Wann endet sie?",
+    "anmeldefrist": "Bis wann anmelden?",
+    "max_teilnehmer": "z. B. 50",
+    "ort_name": "z. B. Technologiezentrum",
+    "strasse": "z. B. Hauptstraße",
+    "hausnummer": "z. B. 12a",
+    "plz": "z. B. 80331",
+    "ort": "z. B. München",
+    "kurzbeschreibung": "Worum geht es kurz?",
+    "beschreibung": "Ablauf, Inhalte und Referenten",
+    "begruessungstext": "Willkommensnachricht für Teilnehmende",
+    "datenschutzhinweis": "Hinweis zur Datenverarbeitung",
+    "bestaetigungstext": "Nachricht nach der Anmeldung",
+    "ansprechperson": "Wer ist Ansprechperson?"
+  },
+  "AnmeldungenDialog.tsx": {
+    "veranstaltung": "Welche Veranstaltung?",
+    "vorname": "z. B. Anna",
+    "nachname": "z. B. Müller",
+    "email": "z. B. anna@firma.de",
+    "unternehmen": "z. B. Muster GmbH",
+    "position": "z. B. Projektleiterin",
+    "anzahl_personen": "z. B. 2",
+    "bemerkungen": "Wünsche oder Hinweise",
+    "person": "Welche Person?"
+  }
+}
